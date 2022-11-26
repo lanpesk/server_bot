@@ -1,12 +1,12 @@
-### Summary
+# Summary
 
-这是用于实验室的QQ机器人小项目。使用flask+gocphttp的框架，搭建一个QQ机器人。
+这是用于实验室的QQ机器人小项目。使用flask+gocqhttp的框架，搭建一个QQ机器人。
 
 如果你有想要添加的功能，请自行fork开发，完成后提交合并请求。
 
 
 
-### Usage
+# Usage
 
 clone本库。然后安装必要python库。
 
@@ -18,7 +18,7 @@ pip install -r requirement.txt
 
 
 
-### Develop
+# Develop
 
 基本的运行框架已经搭建完成。如果想要开发额外的功能，请新建文件开发。完成后在main.py添加对应的链接处理函数。
 
@@ -46,7 +46,7 @@ gocqhttp recive -> flask.route -> parse msg -> parse code -> run message functio
 [target] [head] [code1] [code2] ... [-var value] [--stats] [param ...] 
 ```
 
-target为cqhttp接入处理函数自动添加的，表示当前指令来源："group"群消息,"private"私人消息。你需要在
+target为cqhttp接入处理函数自动添加的，表示当前指令来源："group"群消息,"private"私人消息。
 
 head为指令头，例如当前使用的/bot。随后跟随的时指令片。在"/bot show info"中，show和info都算作指令片。
 
@@ -54,7 +54,7 @@ head为指令头，例如当前使用的/bot。随后跟随的时指令片。在
 
 "--"开头表示bool类型变量，默认为False（需要你自己在函数的参数表中默认），如果存在则会将其置为True。
 
-"-"开头表示变量，其后面一个指令片将作为此变量的值
+"-"开头表示变量，其后面一个指令片将作为此变量的值。
 
 其他情况将作为元组参数。
 
@@ -187,6 +187,8 @@ if __name__=="__main__":
 如果你的功能需要额外的python库，请在requirement.txt文件中添加。
 
 如果你的功能需要额外的指令头，请在filter.json中添加正则匹配。
+
+
 
 
 

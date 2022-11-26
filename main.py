@@ -12,13 +12,13 @@ parse = CommandParse()
 ctfCaldendar = ctf_vcalendar()
 
 
-@parse("group /bot info")
+@parse("group /bot info", help="/bot info <i>: 显示第i条赛事的详细信息")
 def get_event_detail(*args, **kwargs):
     if len(args) < 1 or not args[0].isdigit(): return "参数错误"
     return ctfCaldendar.event_detail(int(args[0], 10))
 
 
-@parse("group /bot; group /bot show")
+@parse("group /bot; group /bot show", help = "/bot 或 /bot show: 显示近期赛事")
 def get_recent_event(*args, **kwargs):
     return ctfCaldendar.event_summary()
 
@@ -46,6 +46,5 @@ def msg_event():
 if __name__ == "__main__":
     ctfCaldendar.job(sorted=True)
     app.run()
-    print(parse.command_search("group /bot info"))
     
     
