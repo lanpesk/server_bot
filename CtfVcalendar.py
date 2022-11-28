@@ -154,23 +154,28 @@ class ctf_vcalendar:
         获取近期十场比赛
         :return:
         """
-        event = self.parse_data[:lens]
-        for i in range(len(event)):
-            event[i]['DTSTART'] = event[i]['DTSTART'].strftime("%m-%d %H:%M")
-            event[i]['DTEND'] = event[i]['DTEND'].strftime("%m-%d %H:%M")
-            
-        return event
+        return self.parse_data[:lens]
     
     
     def event_summary(self):
         events = self.get_event()
 
+        tz = pytz.timezone("Asia/Shanghai")
+        utc = pytz.timezone('UTC')
+
+        timestamp = self.get_localtime()
+        if timestamp is not None:
+            localtime = datetime.fromtimestamp(int(timestamp)).astimezone(tz)
+        else:
+            localtime = datetime.now().astimezone(utc)
+
         notic = []
         for index, event in enumerate(events):
-            notic.append(f"{index+1}:[{event['DTSTART']}] {event['SUMMARY']}")
+            running = "*" if event['DTSTART'] <= localtime <= event['SUMMARY'] else ""
+            notic.append(f"{index+1}:{running}[{self.date4mat(event['DTSTART'])}] {event['SUMMARY']}")
 
-        return "近期十场比赛：\n" + \
-            "\n".join(notic) + "\n" + \
+        return  "近期十场比赛：\n" + \
+                "\n".join(notic) + "\n" + \
                 "---------------\n" + \
                 "信息来源于CTFhub"
 
@@ -179,13 +184,14 @@ class ctf_vcalendar:
         event = self.get_event()[index]
         notic = []
         notic.append(f"[{event['SUMMARY']}]")
-        notic.append(f"时间：{event['DTSTART']} ~ {event['DTEND']}")
+        notic.append(f"时间：{self.date4mat(event['DTSTART'])} ~ {self.date4mat(event['DTEND'])}")
         notic.append(f"地址：{event['URL']}")
         notic.append(f"赛制：{event['DESCRIPTION'][0]} {event['DESCRIPTION'][1]}")
 
         return "\n".join(notic)
         
-        
+    def date4mat(self, date:datetime):
+        return date.strftime("%m-%d %H:%M")
 
 
 if __name__=="__main__":
