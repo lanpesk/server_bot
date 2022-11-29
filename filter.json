@@ -1,5 +1,19 @@
 {
-    "raw_message": {
-        ".regex": "^/bot"
-    }
+    ".or": [
+        {
+            "raw_message": {
+                ".regex": "^/event"
+            }
+        },
+        {
+            "raw_message": {
+                ".regex": "^/plat"
+            }
+        },
+        {
+            "raw_message": {
+                ".regex": "^/help"
+            }
+        }
+    ]
 }
