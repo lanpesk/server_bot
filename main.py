@@ -126,6 +126,6 @@ def first_kill_boardcast():
 
 if __name__ == "__main__":
     ctfCaldendar.job(sorted=True)
-    app.run()
+    app.run(host="0.0.0.0", port=5700)
     
     

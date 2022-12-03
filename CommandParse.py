@@ -11,7 +11,7 @@ class CommandParse:
         return decorator
     
     # TODO: 增加对群或者私人的指令自动生成
-    def add_command(self, command: list[str], link_func):
+    def add_command(self, command: list, link_func):
         """
         通过给定的指令，将指令添加到指令树中。树的每一层分别对应指令的不同部分。
         例如"/bot","!!" 可以分别为不同树的根节点，形成森林。
@@ -59,7 +59,7 @@ class CommandParse:
         
         
     # TODO: 添加对多条指令的解析
-    def command_search(self, command: list[str]):
+    def command_search(self, command: list):
         """
         返回对应指令的处理函数，与传入参数
 
@@ -97,7 +97,7 @@ class CommandParse:
         return ptr["func"](*args, **kwargs)
 
     
-    def parse_param(self,param:list[str]):
+    def parse_param(self,param:list):
         # 解析参数 格式为(*args, **kwargs)
         tuple_param = []
         key_param = {}
@@ -123,11 +123,11 @@ class CommandParse:
                 
         return tuple_param, key_param
     
-
+    # TODO: 添加帮助树，按照不同的头提供帮助信息
     def add_help(self,help:str):
         self.code_help.append(help)
         
-        
+
     def help(self):
         return  "\n".join(self.code_help)
 
