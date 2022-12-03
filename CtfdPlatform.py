@@ -13,7 +13,6 @@ class RequestsError(Exception):
     def __str__(self):
         return self.reson
 
-# TODO: 字符串对齐的中文支持
 class CTFd:
     def __init__(self, url, access_token):
         """
@@ -119,7 +118,7 @@ class CTFd:
 
         for user in table[:10]:
             response.append(
-                f"{user['pos']}".ljust(6) + f"{user['score']}".ljust(10) + f"{user['name']}"
+                ljust(f"{user['pos']}", 6) + ljust(f"{user['score']}", 10) + f"{user['name']}"
             )
 
         return "ScoreBoard\n"    \
@@ -148,7 +147,7 @@ class CTFd:
         response = []
         for index, chall in enumerate(challenges):
             response.append(
-                f"{chall['id']}".ljust(7) + f"{chall['category']}".ljust(10) + f"{chall['solves']}".ljust(7) + f"{chall['name']}"
+                ljust(f"{chall['id']}", 7) + ljust(f"{chall['category']}", 10) + ljust(f"{chall['solves']}", 7) + f"{chall['name']}"
             )
         return "Challenges\n"    \
                "---------------\n" + \
